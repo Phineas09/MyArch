@@ -1,0 +1,31 @@
+#!/bin/bash
+
+percent=1
+
+curentOutput=$(pacmd list-sinks | grep -e 'name:' -e 'index:' | tail -1 | tr "<>" "~" | cut --d=~ -f 2)
+
+curentVolume=$(pacmd list-sinks | grep -e "name: <$curentOutput>"  -e "volume:" | tail -2 | head -1 | cut -d/ -f 2 | tr "%" " " )
+
+
+function volumeUp {
+  
+  if [[ ! "$curentVolume" -ge "100" ]]; then
+    exec pactl set-sink-volume $curentOutput +$percent%
+  fi
+
+}
+
+if [[ $# -eq 2 ]]; then
+  percent=$2
+fi
+
+case $1 in
+  volumeUp)
+    volumeUp;;
+  volumeDown)
+    exec pactl set-sink-volume $curentOutput -$percent%;;
+  toggle)
+    exec pactl set-sink-mute $curentOutput toggle;;
+  *)
+    ;;
+esac

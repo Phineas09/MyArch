@@ -1,0 +1,377 @@
+#!/bin/bash
+#       ___         ___                                                   ___           ___     
+#      /\  \       /\  \                                   _____         /\  \         /\  \    
+#     /::\  \     /::\  \                       ___       /::\  \       /::\  \       /::\  \   
+#    /:/\:\__\   /:/\:\  \                     /|  |     /:/\:\  \     /:/\:\  \     /:/\:\__\  
+#   /:/ /:/  /  /:/  \:\  \   ___     ___     |:|  |    /:/ /::\__\   /:/ /::\  \   /:/ /:/  /  
+#  /:/_/:/  /  /:/__/ \:\__\ /\  \   /\__\    |:|  |   /:/_/:/\:|__| /:/_/:/\:\__\ /:/_/:/__/___
+#  \:\/:/  /   \:\  \ /:/  / \:\  \ /:/  /  __|:|__|   \:\/:/ /:/  / \:\/:/  \/__/ \:\/:::::/  /
+#   \::/__/     \:\  /:/  /   \:\  /:/  /  /::::\  \    \::/_/:/  /   \::/__/       \::/~~/~~~~ 
+#    \:\  \      \:\/:/  /     \:\/:/  /   ~~~~\:\  \    \:\/:/  /     \:\  \        \:\~~\     
+#     \:\__\      \::/  /       \::/  /         \:\__\    \::/  /       \:\__\        \:\__\    
+#      \/__/       \/__/         \/__/           \/__/     \/__/         \/__/         \/__/    
+
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+label-font = 2
+label-foreground = ${colors.foreground-alt}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-background = ${colors.background}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-background = ${colors.background}
+label-occupied-padding = 1
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-background = ${colors.background}
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 1
+
+; Separator in between workspaces
+label-separator = " "
+label-separator-background = ${colors.background}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song =  %title%
+label-song-font = 2
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+label-offline =  mpd is offline
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.secondary}
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.secondary}
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <ramp-signal>
+format-connected-underline = #9f78e1
+label-connected = WiFi 
+label-connected-font = 3
+label-connected-background = ${colors.background}
+label-connected-foreground = ${colors.custom-foreground}
+format-connected-background = ${colors.background}
+
+format-disconnected = 睊
+format-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-background = ${colors.background}
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = ﱢ
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-background = ${colors.background}
+
+[module/eth]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected = 
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 1
+
+date =
+date-alt = "%Y-%m-%d "
+
+time = %H:%M
+time-alt = %H:%M:%S
+
+format-prefix =
+format-prefix-foreground = ${colors.foreground-alt}
+format-background = ${colors.background}
+format-underline = 
+
+label-foreground = ${colors.custom-foreground}
+
+label = %date%%time%
+label-font = 3
+[module/volume-commons]
+format-volume = <label-volume> <bar-volume>
+format-volume-prefix = " "
+;label-volume = VOL %percentage%%
+label-volume = %percentage%
+label-volume-foreground = ${colors.foreground-alt}
+
+label-muted = sound muted
+label-muted-foreground = ${colors.secondary}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${xrdb:color6:#55aa55}
+bar-volume-foreground-1 = ${xrdb:color5:#55aa55}
+bar-volume-foreground-2 = ${xrdb:color4:#55aa55}
+bar-volume-foreground-3 = ${xrdb:color3:#55aa55}
+bar-volume-foreground-4 = ${xrdb:color2:#55aa55}
+bar-volume-foreground-5 = ${xrdb:color1:#f5a70a}
+;bar-volume-foreground-6 = ${xrdb:color7:#ff5555}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/pulseaudio1]
+type = internal/pulseaudio
+
+inherit = module/volume-commons
+
+format-volume = <label-volume>
+format-volume-background = ${colors.background}
+format-muted-background = ${colors.background}
+
+[module/alsa]
+type = internal/alsa
+
+inherit = module/volume-commons
+
+[module/battery-percent]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 97
+
+format-prefix-foreground = ${colors.foreground-alt}
+label-discharging-background = ${colors.background}
+label-charging-background = ${colors.background}
+
+label-full-background = ${colors.background}
+
+
+
+format-discharging-foreground= ${colors.custom-foreground}
+format-charging-foreground= ${colors.custom-foreground}
+format-full-foreground= ${colors.custom-foreground}
+
+
+#FONTS BATTERY
+
+label-charging-font = 3
+label-discharging-font = 3
+label-full-font = 3
+
+format-charging = <label-charging>
+format-full = <label-full>
+format-charging-underline = ${colors.background}
+
+format-discharging = <label-discharging>
+
+
+[module/battery-animation]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 97
+
+
+format-prefix-foreground = ${colors.foreground-alt}
+label-discharging-background = ${colors.background}
+animation-discharging-background = ${colors.background}
+animation-charging-background = ${colors.background}
+label-charging-background = ${colors.background}
+
+format-charging = <animation-charging>
+
+format-charging-underline = ${colors.background}
+
+format-discharging = <animation-discharging>
+
+label-full = ""
+#format-full-prefix = " "
+label-full-foreground = ${colors.foreground-alt}
+label-full-underline = ${self.format-charging-underline}
+label-full-background = ${colors.background}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-framerate = 750
+
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces=true
+fuzzy-match = true
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+
+label-focused = 
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground-alt}
+
+label-unfocused = 
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.custom-foreground}
+
+label-visible = %icon%
+
+label-separator = █
+label-separator-foreground = ${colors.background}
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+#sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+sink=$(pacmd list-sinks | grep -e 'name:' -e 'index:' | tail -1 | tr "<>" "~" | cut --d=~ -f 2)
+
+use-ui-max = true
+
+interval = 5
+
+format-volume = <ramp-volume> 
+format-muted = <label-muted>
+
+label-muted = 婢
+label-muted-foreground = ${colors.foreground-alt}
+label-muted-background = ${colors.background}
+
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+ramp-volume-foreground = ${colors.foreground-alt}
+ramp-volume-background = ${colors.background}
+
