@@ -194,6 +194,9 @@ bindsym $mod+Shift+Tab exec "rofi -combi-modi drun,run -show combi"
 bindsym XF86MonBrightnessDown exec ~/.config/i3/brightness-.sh
 bindsym XF86MonBrightnessUp exec ~/.config/i3/brightness+.sh
 
+bindsym XF86KbdBrightnessDown exec ~/.config/i3/keyboardBacklight.sh -1
+bindsym XF86KbdBrightnessUp exec ~/.config/i3/keyboardBacklight.sh 1
+
 #bindsym XF86AudioMute exec amixer -q sset Master toggle
 #bindsym XF86AudioLowerVolume exec amixer -q sset Master 0.75db-
 #bindsym XF86AudioRaiseVolume exec amixer -q sset Master 0.75db+
@@ -204,5 +207,36 @@ bindsym $mod+Shift+Delete exec ~/.config/i3/lockScreen.sh
 
 #Background
 
-exec_always --no-startup-id feh --bg-scale /home/Downloads/Background.jpg &
+#exec_always --no-startup-id feh  --bg-scale /home/Downloads/Background.jpg &
+
+exec_always --no-startup-id  /etc/cron.hourly/backgroundChanger.sh
+exec_always --no-startup-id libinput-gestures-setup start
+
+#exec_always --no-startup-id feh --bg-scale /home/Downloads/Backgrounds/nightBackground.jpg &
+
+
+
+
+
+
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
+
+
+
+
+
+
+
+
 
